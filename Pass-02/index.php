@@ -2,16 +2,31 @@
 include '../config.php';
 include '../head.php';
 include '../menu.php';
+include '../common.php';
 
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
         if (($_FILES['upload_file']['type'] == 'image/jpeg') || ($_FILES['upload_file']['type'] == 'image/png') || ($_FILES['upload_file']['type'] == 'image/gif')) {
+            
+            $deny_ext = array(".php",".php5",".php4",".php3",".php2",".html",".htm",".phtml",".pht",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".swf",".htaccess",".ini");
+            $file_name = trim($_FILES['upload_file']['name']);
+            $file_name = deldot($file_name);//删除文件名末尾的点
+            $file_ext = strrchr($file_name, '.');
+            $file_ext = strtolower($file_ext); //转换为小写
+            $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
+            $file_ext = trim($file_ext); //首尾去空
+            $file_ext = strrchr($file_name, '.');
+            
             $temp_file = $_FILES['upload_file']['tmp_name'];
             $img_path = UPLOAD_PATH . '/' . $_FILES['upload_file']['name'];          
             if (move_uploaded_file($temp_file, $img_path)) {
                 $is_upload = true;
+                if (in_array($file_ext, $deny_ext)){
+                    //$score_pass02 = 1;
+                    $msg = '成功得分！';
+                }
             } else {
                 $msg = '上传出错！';
             }
