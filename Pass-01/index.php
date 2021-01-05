@@ -7,7 +7,6 @@ include '../common.php';
 
 $is_upload = false;
 $msg = null;
-$score_pass01 = 0;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
 	    
@@ -19,14 +18,15 @@ if (isset($_POST['submit'])) {
         $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
         $file_ext = trim($file_ext); //首尾去空
         $file_ext = strrchr($file_name, '.');
-        if (in_array($file_ext, $deny_ext)){
-            $score_pass01 = 1;
-        }
+        
 	    
         $temp_file = $_FILES['upload_file']['tmp_name'];
         $img_path = UPLOAD_PATH . '/' . $_FILES['upload_file']['name'];
         if (move_uploaded_file($temp_file, $img_path)){
             $is_upload = true;
+	    if (in_array($file_ext, $deny_ext)){
+            	$msg = '成功得分！';
+            }
         } else {
             $msg = '上传出错！';
         }
