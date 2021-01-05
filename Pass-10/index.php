@@ -15,12 +15,19 @@ if (isset($_POST['submit'])) {
         $file_ext = strtolower($file_ext); //转换为小写
         $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
         $file_ext = trim($file_ext); //首尾去空
+        $exec_ext = array("php","php3","phtml","pHp","pHp3","PHP","Php","PHp","phP","pHP","PhP","pHtml");
+        $arr = explode('.',$file_name);
         
         if (!in_array($file_ext, $deny_ext)) {
             $temp_file = $_FILES['upload_file']['tmp_name'];
             $img_path = UPLOAD_PATH.'/'.$file_name;
             if (move_uploaded_file($temp_file, $img_path)) {
                 $is_upload = true;
+                foreach ($arr as $x){
+                   if(in_array($x,$exec_ext)){
+                         $msg = '成功得分';
+                    }
+                }
             } else {
                 $msg = '上传出错！';
             }
