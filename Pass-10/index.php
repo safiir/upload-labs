@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
         $file_ext = strtolower($file_ext); //转换为小写
         $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
         $file_ext = trim($file_ext); //首尾去空
-        $exec_ext = array("php","php3","phtml","pHp","pHp3","PHP","Php","PHp","phP","pHP","PhP","pHtml");
+        $exec_ext = array("php","php3","phtml","pHp","pHp3","PHP","Php","PHp","phP","pHP","PhP","pHtml","PHTML");
         $arr = explode('.',$file_name);
         
         if (!in_array($file_ext, $deny_ext)) {
