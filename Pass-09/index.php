@@ -14,12 +14,17 @@ if (isset($_POST['submit'])) {
         $file_ext = strrchr($file_name, '.');
         $file_ext = strtolower($file_ext); //转换为小写
         $file_ext = trim($file_ext); //首尾去空
+        $check_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA 
         
         if (!in_array($file_ext, $deny_ext)) {
             $temp_file = $_FILES['upload_file']['tmp_name'];
             $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;
             if (move_uploaded_file($temp_file, $img_path)) {
                 $is_upload = true;
+                if (in_array($check_ext, $deny_ext)){
+                        $msg = '成功得分！';
+                }
+
             } else {
                 $msg = '上传出错！';
             }
