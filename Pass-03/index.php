@@ -9,6 +9,7 @@ $msg = null;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
         $deny_ext = array('.asp','.aspx','.php','.jsp');
+        $include_ext = array('.php3','.phtml');
         $file_name = trim($_FILES['upload_file']['name']);
         $file_name = deldot($file_name);//删除文件名末尾的点
         $file_ext = strrchr($file_name, '.');
@@ -21,6 +22,9 @@ if (isset($_POST['submit'])) {
             $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;            
             if (move_uploaded_file($temp_file,$img_path)) {
                  $is_upload = true;
+                 if(in_array($file_ext,$include_ext)){
+                    $msg = '成功得分！';
+                 }
             } else {
                 $msg = '上传出错！';
             }
