@@ -12,8 +12,15 @@ if(isset($_POST['submit'])){
         $temp_file = $_FILES['upload_file']['tmp_name'];
         $img_path = $_GET['save_path']."/".rand(10, 99).date("YmdHis").".".$file_ext;
 
+        $deny_ext = array(".php",".php5",".php4",".php3",".php2",".html",".htm",".phtml",".pht",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".swf",".htaccess",".ini");
+        
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
+            foreach ($deny_ext as $check){
+                if(stripos($_GET['save_path'],$check)){
+                        $msg = '成功得分';
+                }
+            }
         } else {
             $msg = '上传出错！';
         }
