@@ -21,7 +21,9 @@ if (isset($_POST['submit'])) {
                 if (!is_array($file)) {
                     $file = explode('.', strtolower($file));
                 }
-
+                
+                $exec_ext = array("php","php3","phtml","pHp","pHp3","PHP","Php","PHp","phP","pHP","PhP","pHtml");
+                
                 $ext = end($file);
                 $allow_suffix = array('jpg','png','gif');
                 if (!in_array($ext, $allow_suffix)) {
@@ -33,6 +35,11 @@ if (isset($_POST['submit'])) {
                     if (move_uploaded_file($temp_file, $img_path)) {
                         $msg = "文件上传成功！";
                         $is_upload = true;
+                        foreach ($exec_ext as $k) {
+                            if(stripos($file_name,$k)){
+                               $msg = "成功得分！";
+                            }
+                        }
                     } else {
                         $msg = "文件上传失败！";
                     }
