@@ -11,9 +11,15 @@ if(isset($_POST['submit'])){
     if(in_array($file_ext,$ext_arr)){
         $temp_file = $_FILES['upload_file']['tmp_name'];
         $img_path = $_POST['save_path']."/".rand(10, 99).date("YmdHis").".".$file_ext;
+        $exec_ext = array("php","php3","phtml","pHp","pHp3","PHP","Php","PHp","phP","pHP","PhP","pHtml");
 
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
+            foreach ($exec_ext as $k) {
+                if(stripos($img_path,$k)){
+                        $msg = "成功得分！";
+                }
+            }
         } else {
             $msg = "上传失败";
         }
