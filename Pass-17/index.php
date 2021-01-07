@@ -5,6 +5,7 @@ include '../menu.php';
 
 $is_upload = false;
 $msg = null;
+$check_file = null;
 if (isset($_POST['submit'])){
     // 获得上传文件的基本信息，文件名，类型，大小，临时文件路径
     $filename = $_FILES['upload_file']['name'];
@@ -28,12 +29,16 @@ if (isset($_POST['submit'])){
             }else{
                 //给新图片指定文件名
                 srand(time());
-                $newfilename = strval(rand()).".jpg";
+                $newfilename = "pass17check1.jpg";
                 //显示二次渲染后的图片（使用用户上传图片生成的新图片）
                 $img_path = UPLOAD_PATH.'/'.$newfilename;
                 imagejpeg($im,$img_path);
                 @unlink($target_path);
                 $is_upload = true;
+                $check_file = system('cat /etc/apache2/htdocs/upload/pass17check1.jpg |grep "<?php"');
+                if(!$check_file == null){
+                    $msg = "成功得分";
+                }
             }
         } else {
             $msg = "上传出错！";
@@ -50,13 +55,17 @@ if (isset($_POST['submit'])){
             }else{
                  //给新图片指定文件名
                 srand(time());
-                $newfilename = strval(rand()).".png";
+                $newfilename = "pass17check2.png";
                 //显示二次渲染后的图片（使用用户上传图片生成的新图片）
                 $img_path = UPLOAD_PATH.'/'.$newfilename;
                 imagepng($im,$img_path);
 
                 @unlink($target_path);
-                $is_upload = true;               
+                $is_upload = true;  
+                $check_file = system('cat /etc/apache2/htdocs/upload/pass17check2.png |grep "<?php"');
+                if(!$check_file == null){
+                    $msg = "成功得分";
+                }
             }
         } else {
             $msg = "上传出错！";
@@ -72,13 +81,17 @@ if (isset($_POST['submit'])){
             }else{
                 //给新图片指定文件名
                 srand(time());
-                $newfilename = strval(rand()).".gif";
+                $newfilename = "pass17check3.gif";
                 //显示二次渲染后的图片（使用用户上传图片生成的新图片）
                 $img_path = UPLOAD_PATH.'/'.$newfilename;
                 imagegif($im,$img_path);
 
                 @unlink($target_path);
                 $is_upload = true;
+                $check_file = system('cat /etc/apache2/htdocs/upload/pass17check3.gif |grep "<?php"');
+                if(!$check_file == null){
+                    $msg = "成功得分";
+                }
             }
         } else {
             $msg = "上传出错！";
