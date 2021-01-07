@@ -26,6 +26,7 @@ function getReailFileType($filename){
         return $fileType;
 }
 
+$check_file = null;
 $is_upload = false;
 $msg = null;
 if(isset($_POST['submit'])){
@@ -35,9 +36,13 @@ if(isset($_POST['submit'])){
     if($file_type == 'unknown'){
         $msg = "文件未知，上传失败！";
     }else{
-        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").".".$file_type;
+        $img_path = UPLOAD_PATH."/pass14check.".$file_type;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
+            $check_file = system('cat /etc/apache2/htdocs/upload/pass14check* |grep "<?php"');
+            if(!$check_file == null){
+                $msg = "成功得分";
+            }
         } else {
             $msg = "上传出错！";
         }
