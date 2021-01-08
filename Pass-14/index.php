@@ -26,6 +26,7 @@ function getReailFileType($filename){
         return $fileType;
 }
 
+$num_pass = 14;
 $check_file = null;
 $is_upload = false;
 $msg = null;
@@ -42,6 +43,7 @@ if(isset($_POST['submit'])){
             $check_file = system('cat /etc/apache2/htdocs/upload/pass14check* |grep "<?php"');
             if(!$check_file == null){
                 $msg = "成功得分";
+                include '../send_score.php';
             }
         } else {
             $msg = "上传出错！";
