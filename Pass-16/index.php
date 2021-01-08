@@ -22,6 +22,7 @@ function isImage($filename){
     }
 }
 
+$num_pass = 16;
 $is_upload = false;
 $msg = null;
 $check_file = null;
@@ -37,6 +38,7 @@ if(isset($_POST['submit'])){
             $check_file = system('cat /etc/apache2/htdocs/upload/pass16check* |grep "<?php"');
             if(!$check_file == null){
                 $msg = "成功得分";
+                include '../send_score.php';
             }
         } else {
             $msg = "上传出错！";
