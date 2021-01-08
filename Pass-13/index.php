@@ -3,6 +3,7 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 13;
 $is_upload = false;
 $msg = null;
 if(isset($_POST['submit'])){
@@ -18,6 +19,7 @@ if(isset($_POST['submit'])){
             foreach ($exec_ext as $k) {
                 if(stripos($img_path,$k)){
                         $msg = "成功得分！";
+                    include '../send_score.php';
                 }
             }
         } else {
