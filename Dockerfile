@@ -16,6 +16,8 @@ COPY . /etc/apache2/htdocs/
 
 # install upload-labs
 RUN chown www-data:www-data -R /etc/apache2/htdocs && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    chmod 757 /var/log/apache2 && \
+    chmod 777 /var/log/apache2/other_vhosts_access.log
 
 EXPOSE 80
