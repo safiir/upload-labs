@@ -4,7 +4,7 @@ include '../head.php';
 include '../menu.php';
 include '../common.php';
 
-$num_pass = 1;
+$num_pass = 2;
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
