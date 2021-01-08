@@ -3,18 +3,27 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 11;
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
         $deny_ext = array("php","php5","php4","php3","php2","html","htm","phtml","pht","jsp","jspa","jspx","jsw","jsv","jspf","jtml","asp","aspx","asa","asax","ascx","ashx","asmx","cer","swf","htaccess","ini");
-
+        $check_ext =array(".php",".php5",".php4",".php3",".php2",".html",".htm",".phtml",".pht",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".swf",".htaccess",".ini");
+        
         $file_name = trim($_FILES['upload_file']['name']);
         $file_name = str_ireplace($deny_ext,"", $file_name);
+        $file_ext = strrchr($file_name, '.');
+        $file_ext = strtolower($file_ext); //转换为小写
+        
         $temp_file = $_FILES['upload_file']['tmp_name'];
         $img_path = UPLOAD_PATH.'/'.$file_name;        
         if (move_uploaded_file($temp_file, $img_path)) {
             $is_upload = true;
+            if(in_array($file_ext,$check_ext)){
+                $msg = '成功得分！';
+                include '../send_score.php';
+            }
         } else {
             $msg = '上传出错！';
         }

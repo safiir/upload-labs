@@ -18,17 +18,24 @@ function isImage($filename){
     }
 }
 
+$num_pass = 15;
 $is_upload = false;
 $msg = null;
+$check_file = null;
 if(isset($_POST['submit'])){
     $temp_file = $_FILES['upload_file']['tmp_name'];
     $res = isImage($temp_file);
     if(!$res){
         $msg = "文件未知，上传失败！";
     }else{
-        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").$res;
+        $img_path = UPLOAD_PATH."/pass15check".$res;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
+            $check_file = system('cat /etc/apache2/htdocs/upload/pass15check* |grep "<?php"');
+            if(!$check_file == null){
+                $msg = "成功得分";
+                include '../send_score.php';
+            }
         } else {
             $msg = "上传出错！";
         }

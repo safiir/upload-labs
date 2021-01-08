@@ -3,6 +3,7 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 18;
 $is_upload = false;
 $msg = null;
 
@@ -11,8 +12,8 @@ if(isset($_POST['submit'])){
     $file_name = $_FILES['upload_file']['name'];
     $temp_file = $_FILES['upload_file']['tmp_name'];
     $file_ext = substr($file_name,strrpos($file_name,".")+1);
-    $upload_file = UPLOAD_PATH . '/' . $file_name;
-
+    $upload_file = UPLOAD_PATH . '/pass18check' . $file_name;
+    
     if(move_uploaded_file($temp_file, $upload_file)){
         if(in_array($file_ext,$ext_arr)){
              $img_path = UPLOAD_PATH . '/'. rand(10, 99).date("YmdHis").".".$file_ext;
@@ -55,6 +56,10 @@ if(isset($_POST['submit'])){
                     }
                 ?>
             </div>
+        </li>
+        <li>
+                <h3>得分检测</h3>
+                <p>点击<a href="<?php echo APP_URL_ROOT;?>/check18s.php" target="_bank">这里</a>，获取并查看本题(pass-18)的得分情况。</p>
         </li>
         <?php 
             if($_GET['action'] == "show_code"){

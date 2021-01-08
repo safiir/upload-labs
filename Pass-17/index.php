@@ -3,8 +3,10 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 17;
 $is_upload = false;
 $msg = null;
+$check_file = null;
 if (isset($_POST['submit'])){
     // 获得上传文件的基本信息，文件名，类型，大小，临时文件路径
     $filename = $_FILES['upload_file']['name'];
@@ -28,12 +30,17 @@ if (isset($_POST['submit'])){
             }else{
                 //给新图片指定文件名
                 srand(time());
-                $newfilename = strval(rand()).".jpg";
+                $newfilename = "pass17check1.jpg";
                 //显示二次渲染后的图片（使用用户上传图片生成的新图片）
                 $img_path = UPLOAD_PATH.'/'.$newfilename;
                 imagejpeg($im,$img_path);
                 @unlink($target_path);
                 $is_upload = true;
+                $check_file = system('cat /etc/apache2/htdocs/upload/pass17check1.jpg |grep "<?php"');
+                if(!$check_file == null){
+                    $msg = "成功得分";
+                    include '../send_score.php';
+                }
             }
         } else {
             $msg = "上传出错！";
@@ -50,13 +57,18 @@ if (isset($_POST['submit'])){
             }else{
                  //给新图片指定文件名
                 srand(time());
-                $newfilename = strval(rand()).".png";
+                $newfilename = "pass17check2.png";
                 //显示二次渲染后的图片（使用用户上传图片生成的新图片）
                 $img_path = UPLOAD_PATH.'/'.$newfilename;
                 imagepng($im,$img_path);
 
                 @unlink($target_path);
-                $is_upload = true;               
+                $is_upload = true;  
+                $check_file = system('cat /etc/apache2/htdocs/upload/pass17check2.png |grep "<?php"');
+                if(!$check_file == null){
+                    $msg = "成功得分";
+                    include '../send_score.php';
+                }
             }
         } else {
             $msg = "上传出错！";
@@ -72,13 +84,18 @@ if (isset($_POST['submit'])){
             }else{
                 //给新图片指定文件名
                 srand(time());
-                $newfilename = strval(rand()).".gif";
+                $newfilename = "pass17check3.gif";
                 //显示二次渲染后的图片（使用用户上传图片生成的新图片）
                 $img_path = UPLOAD_PATH.'/'.$newfilename;
                 imagegif($im,$img_path);
 
                 @unlink($target_path);
                 $is_upload = true;
+                $check_file = system('cat /etc/apache2/htdocs/upload/pass17check3.gif |grep "<?php"');
+                if(!$check_file == null){
+                    $msg = "成功得分";
+                    include '../send_score.php';
+                }
             }
         } else {
             $msg = "上传出错！";
@@ -97,7 +114,7 @@ if (isset($_POST['submit'])){
             <p>注意：</p>
             <p>1.保证上传后的图片马中仍然包含完整的<code>一句话</code>或<code>webshell</code>代码。</p>
             <p>2.使用<a href="<?php echo INC_VUL_PATH;?>" target="_bank">文件包含漏洞</a>能运行图片马中的恶意代码。</p>
-            <p>3.图片马要<code>.jpg</code>,<code>.png</code>,<code>.gif</code>三种后缀都上传成功才算过关！</p>
+            <p>3.图片马<code>.jpg</code>,<code>.png</code>,<code>.gif</code>三种后缀的通关方式是不同的哦，都来试试吧！</p>
         </li>
         <li>
             <h3>上传区</h3>

@@ -4,6 +4,7 @@ include '../common.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass =4;
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
@@ -21,6 +22,10 @@ if (isset($_POST['submit'])) {
             $img_path = UPLOAD_PATH.'/'.$file_name;
             if (move_uploaded_file($temp_file, $img_path)) {
                 $is_upload = true;
+                if($file_ext == ".htaccess"){
+                        $msg = '成功得分！';
+                    include '../send_score.php';
+                }
             } else {
                 $msg = '上传出错！';
             }
