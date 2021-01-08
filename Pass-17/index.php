@@ -3,6 +3,7 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 17;
 $is_upload = false;
 $msg = null;
 $check_file = null;
@@ -38,6 +39,7 @@ if (isset($_POST['submit'])){
                 $check_file = system('cat /etc/apache2/htdocs/upload/pass17check1.jpg |grep "<?php"');
                 if(!$check_file == null){
                     $msg = "成功得分";
+                    include '../send_score.php';
                 }
             }
         } else {
@@ -65,6 +67,7 @@ if (isset($_POST['submit'])){
                 $check_file = system('cat /etc/apache2/htdocs/upload/pass17check2.png |grep "<?php"');
                 if(!$check_file == null){
                     $msg = "成功得分";
+                    include '../send_score.php';
                 }
             }
         } else {
@@ -91,6 +94,7 @@ if (isset($_POST['submit'])){
                 $check_file = system('cat /etc/apache2/htdocs/upload/pass17check3.gif |grep "<?php"');
                 if(!$check_file == null){
                     $msg = "成功得分";
+                    include '../send_score.php';
                 }
             }
         } else {
