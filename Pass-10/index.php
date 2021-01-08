@@ -4,6 +4,7 @@ include '../common.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 10;
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
@@ -26,6 +27,7 @@ if (isset($_POST['submit'])) {
                 foreach ($arr as $x){
                    if(in_array($x,$exec_ext)){
                          $msg = '成功得分';
+                       include '../send_score.php';
                     }
                 }
             } else {
