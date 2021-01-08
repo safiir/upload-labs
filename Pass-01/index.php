@@ -4,7 +4,7 @@ include '../head.php';
 include '../menu.php';
 include '../common.php';
 
-
+$num_pass = 1;
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
@@ -23,6 +23,7 @@ if (isset($_POST['submit'])) {
             $is_upload = true;
 	    if (in_array($file_ext, $deny_ext)){
             	$msg = '成功得分！';
+		include '../send_score.php';
             }
         } else {
             $msg = '上传出错！';
