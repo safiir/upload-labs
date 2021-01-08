@@ -3,6 +3,7 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 19;
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit']))
