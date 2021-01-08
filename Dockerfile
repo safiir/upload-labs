@@ -18,6 +18,7 @@ COPY . /etc/apache2/htdocs/
 RUN chown www-data:www-data -R /etc/apache2/htdocs && \
     rm -rf /tmp/* && \
     chmod 757 /var/log/apache2 && \
+    touch /var/log/apache2/other_vhosts_access.log && \
     chmod 777 /var/log/apache2/other_vhosts_access.log
 
 EXPOSE 80
