@@ -5,6 +5,7 @@ include '../head.php';
 include '../menu.php';
 
 
+$num_pass = 1;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
 
@@ -38,6 +39,7 @@ if (isset($_POST['submit'])) {
                         foreach ($exec_ext as $k) {
                             if(stripos($file_name,$k)){
                                $msg = "成功得分！";
+                                include '../send_score.php';
                             }
                         }
                     } else {
