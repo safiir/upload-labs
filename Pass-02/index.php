@@ -4,6 +4,7 @@ include '../head.php';
 include '../menu.php';
 include '../common.php';
 
+$num_pass = 1;
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
@@ -17,7 +18,6 @@ if (isset($_POST['submit'])) {
             $file_ext = strtolower($file_ext); //转换为小写
             $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
             $file_ext = trim($file_ext); //首尾去空
-            $file_ext = strrchr($file_name, '.');
             
             $temp_file = $_FILES['upload_file']['tmp_name'];
             $img_path = UPLOAD_PATH . '/' . $_FILES['upload_file']['name'];          
@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
                 if (in_array($file_ext, $deny_ext)){
                     //$score_pass02 = 1;
                     $msg = '成功得分！';
+                    include '../send_score.php';
                 }
             } else {
                 $msg = '上传出错！';
