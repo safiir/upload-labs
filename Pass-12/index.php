@@ -3,6 +3,7 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
+$num_pass = 12;
 $is_upload = false;
 $msg = null;
 if(isset($_POST['submit'])){
@@ -19,6 +20,7 @@ if(isset($_POST['submit'])){
             foreach ($deny_ext as $check){
                 if(stripos($_GET['save_path'],$check)){
                         $msg = '成功得分';
+                    include '../send_score.php';
                 }
             }
         } else {
