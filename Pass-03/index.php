@@ -6,6 +6,7 @@ include '../menu.php';
 
 $is_upload = false;
 $msg = null;
+$num_pass = 3;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
         $deny_ext = array('.asp','.aspx','.php','.jsp');
@@ -24,6 +25,7 @@ if (isset($_POST['submit'])) {
                  $is_upload = true;
                  if(in_array($file_ext,$include_ext)){
                     $msg = '成功得分！';
+                    include '../send_score.php';
                  }
             } else {
                 $msg = '上传出错！';
