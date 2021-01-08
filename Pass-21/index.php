@@ -5,7 +5,7 @@ include '../head.php';
 include '../menu.php';
 
 
-$num_pass = 1;
+$num_pass = 20;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
 
