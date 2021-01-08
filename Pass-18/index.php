@@ -57,6 +57,10 @@ if(isset($_POST['submit'])){
                 ?>
             </div>
         </li>
+        <li>
+                <h3>得分检测</h3>
+                <p>点击<a href="<?php echo APP_URL_ROOT;?>/check18s.php" target="_bank">这里</a>，获取并查看本题(pass-18)的得分情况。</p>
+        </li>
         <?php 
             if($_GET['action'] == "show_code"){
                 include 'show_code.php';
