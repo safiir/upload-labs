@@ -2,33 +2,7 @@
 * author: c0ny1
 * date: 2018-6-13
 * project: https://github.com/c0ny1/upload-labs
-* modify: mituan ,2020-12-30
 */
-
-function show_score(){
-	//当前题目得分情况
-	var url = window.location.href;
-	if(url.indexOf("?") != -1){
-		url = url.split("?")[0];
-	}	
-	
-	var e = document.getElementById("show_score");
-	if(e == null){
-		window.location.href=url+"?action=show_score";
-	}else{
-		window.location.href=url;
-	}
-}
-
-function modify_showscore_name(){
-	var url = window.location.href;
-	var btn_showscore = document.getElementById("handle_score");
-	if(url.indexOf('show_score') >= 0){
-		btn_showscore.innerHTML = "隐藏得分";
-	}else{
-		btn_showscore.innerHTML = "显示得分";
-	}
-}
 
 
 function show_code(){
@@ -110,8 +84,6 @@ var Dialog = {
 }
 
 $(function(){
-	//修改得分按钮名称
-	modify_showscore_name();
 	//修改显示源码按钮名称
 	modify_showcode_name();
 	//更新版权时间
